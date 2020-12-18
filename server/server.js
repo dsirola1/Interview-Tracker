@@ -13,6 +13,18 @@ app.use(express.urlencoded({ extended: true }));
 // Route Handlers
 app.use("/application", applicationRouter);
 
+//components
+app.use('/login', (req, res)=>{
+  res.send({
+    token: 'test123'
+  })
+})
+
+
+
+
+
+
 //Default Error Handler
 app.use((err, req, res, next) => {
   const defaultErr = {
