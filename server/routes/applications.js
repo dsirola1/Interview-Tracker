@@ -1,11 +1,30 @@
-const express = require("express");
+const express = require('express');
+const applicationsController = require('../controllers/applicationsController');
 
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 
-const stepRouter = require("../routes/steps");
+const stepRouter = require('../routes/steps');
 
-router.get("/", (req, res) => res.status(200).json({ hi: "there" }));
+// get all applications for this user_id
+router.get('/', applicationsController.getAllApps, (req, res) => {
+  res.status(200).json({ hi: 'there' });
+});
 
-router.use("/:app_id/step", stepRouter);
+// add new app
+router.post('/', applicationsController.addApp, (req, res) => {
+  res.status(200).json({});
+});
+
+// edit app
+router.put('/:app_id', applicationsController.editApp, (req, res) => {
+  res.status(200).json({});
+});
+
+// delete app
+router.delete('/:app_id', applicationsController.deleteApp, (req, res) => {
+  res.status(200).json({});
+});
+
+router.use('/:app_id/step', stepRouter);
 
 module.exports = router;
